@@ -17,9 +17,9 @@ RUN apt install -y sudo wget gpg rsync htop mc net-tools apt-transport-https cur
     echo "kasm-user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     rm -rf /var/lib/apt/list/* && \
     sudo passwd -d kasm-user && \
-    echo 'alias ll="ls -lah"' >> $HOME/.bashrc
-    echo 'export HISTSIZE=10000' >> $HOME/.bashrc
-    echo 'export HISTFILESIZE=10000' >> $HOME/.bashrc
+    echo 'alias ll="ls -lah"' >> $HOME/.bashrc &&\
+    echo 'export HISTSIZE=10000' >> $HOME/.bashrc &&\
+    echo 'export HISTFILESIZE=10000' >> $HOME/.bashrc &&\
     echo 'export HISTCONTROL=ignoreboth:erasedups' >> $HOME/.bashrc
 
 # Устанавливаем windsurf
