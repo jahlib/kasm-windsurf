@@ -35,7 +35,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | b
 ENV NVM_DIR=$HOME/.nvm
 RUN bash -c "source $NVM_DIR/nvm.sh && nvm install node"
 
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $HOME/chrome.deb && dpkg -i $HOME/chrome.deb
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $HOME/chrome.deb && dpkg -i $HOME/chrome.deb && apt --fix-broken install
 
 # Устанавливаем windsurf
 RUN wget -qO- "https://windsurf-stable.codeiumdata.com/wVxQEIWkwPUEAGf3/windsurf.gpg" | gpg --dearmor > /usr/share/keyrings/windsurf-stable.gpg && \
