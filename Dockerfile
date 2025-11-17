@@ -22,7 +22,7 @@ RUN apt install -y sudo wget gpg rsync htop mc net-tools locales apt-transport-h
     echo 'PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"' >> $HOME/.bashrc && \
     echo 'export HISTSIZE=10000' >> $HOME/.bashrc && \
     echo 'export HISTFILESIZE=10000' >> $HOME/.bashrc && \
-    echo 'export HISTCONTROL=ignoreboth:erasedups' >> $HOME/.bashrc && \
+    echo 'export HISTCONTROL=ignoredups:erasedups' >> $HOME/.bashrc && \
     echo "export HISTFILE=/home/kasm-user/.bash_history" >> $HOME/.bashrc && \
     echo 'alias ll="ls -lah"' >> $HOME/.bashrc && \
     echo 'if [ -n "$BASH_VERSION" ]; then' >> $HOME/.profile && \
