@@ -19,7 +19,7 @@ RUN apt install -y sudo wget gpg rsync htop mc net-tools locales apt-transport-h
     sudo passwd -d kasm-user && \
     echo 'set -o history' >> $HOME/.bashrc && \
     echo 'shopt -s histappend' >> $HOME/.bashrc && \
-    echo 'PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"' >> $HOME/.bashrc && \
+    echo 'PROMPT_COMMAND="history -a; $PROMPT_COMMAND"' >> $HOME/.bashrc && \
     echo 'export HISTSIZE=10000' >> $HOME/.bashrc && \
     echo 'export HISTFILESIZE=10000' >> $HOME/.bashrc && \
     echo 'export HISTCONTROL=ignoredups:erasedups' >> $HOME/.bashrc && \
