@@ -1,4 +1,4 @@
-FROM kasmweb/core-ubuntu-noble:1.17.0-rolling-weekly
+FROM kasmweb/ubuntu-noble-desktop:1.17.0-rolling-weekly
 USER root
 
 ENV HOME=/home/kasm-default-profile
@@ -13,7 +13,7 @@ RUN apt update \
     && sudo apt upgrade -y
 
 # Устанавливаем зависимости
-RUN apt install -y sudo wget gpg rsync htop mc net-tools locales apt-transport-https curl gnome-keyring && \
+RUN apt install -y sudo wget gpg rsync htop mc net-tools locales apt-transport-https curl npm nodejs gnome-keyring && \
     echo "kasm-user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     rm -rf /var/lib/apt/list/* && \
     sudo passwd -d kasm-user && \
@@ -30,12 +30,16 @@ RUN apt install -y sudo wget gpg rsync htop mc net-tools locales apt-transport-h
     echo '    . /home/kasm-user/.bashrc"' >> $HOME/.profile && \
     echo 'fi fi' >> $HOME/.profile
 
-# Устанавливаем node.js
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-ENV NVM_DIR=$HOME/.nvm
-RUN bash -c "source $NVM_DIR/nvm.sh && nvm install node"
 
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $HOME/chrome.deb && dpkg -i $HOME/chrome.deb && apt --fix-broken install
+# Use bash for the shell
+#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Download and install nvm
+#RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | PROFILE="${BASH_ENV}" bash
+#RUN echo node > $HOME/.nvmrc
+#RUN nvm install
+
+#RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $HOME/chrome.deb && dpkg -i $HOME/chrome.deb && apt --fix-broken install
 
 # Устанавливаем windsurf
 RUN wget -qO- "https://windsurf-stable.codeiumdata.com/wVxQEIWkwPUEAGf3/windsurf.gpg" | gpg --dearmor > /usr/share/keyrings/windsurf-stable.gpg && \
@@ -49,7 +53,7 @@ RUN wget -qO- "https://windsurf-stable.codeiumdata.com/wVxQEIWkwPUEAGf3/windsurf
 
 RUN ln -sf /usr/share/applications/windsurf.desktop $HOME/Desktop/windsurf.desktop && \
     chmod a+x $HOME/Desktop/windsurf.desktop && \
-    wget https://images.wallpaperscraft.com/image/single/mycena_mushroom_nature_1443869_3840x2400.jpg -O /usr/share/backgrounds/bg_default.png
+    wget https://images.wallpaperscraft.com/image/single/leaves_drops_dew_129757_3840x2160.jpg -O /usr/share/backgrounds/bg_default.png
 
 RUN locale-gen ru_RU.UTF-8 && \
     update-locale LANG=ru_RU.UTF-8
@@ -65,5 +69,6 @@ RUN $STARTUPDIR/set_user_permission.sh $HOME
 ENV HOME=/home/kasm-user
 WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
+
 
 USER 1000
